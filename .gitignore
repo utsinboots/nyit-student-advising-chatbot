@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+
+# Environment variables (CRITICAL - don't upload API keys!)
+.env
+*.env
+.env.local
+.env.*.local
+
+# FAISS indexes (too large for GitHub)
+indexes/
+*.index
+*.faiss
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Test results
+results/
+*.json
+
+# Charts (optional - if too many)
+charts/
+*.png
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Data files (if large)
+# Uncomment if your JSONL files are huge (>100MB)
+# data/*.jsonl
