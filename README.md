@@ -1,6 +1,10 @@
 # NYIT AI Academic Advisor Chatbot
 
-A hybrid AI academic advising chatbot with confidence-based query routing model
+To Design, Develop and Benchmark an Efficient Hybrid AI Acadmic Advisor Chatbot: Analyzing AI Agent Models, Large Language Models, and Network Configurations.
+
+## Demo
+
+![Chatbot Demo](assets/demo.gif)
 
 ## Project Overview
 
@@ -13,18 +17,28 @@ This project implements a hybrid AI acadeimc advising chatbot that intelligently
 ## System Architecture
 
 ```
-User Query
-   ↓
-Query Router
-   ├── Rule-Based (Fast, $0)
-   ├── RAG + Embeddings (Medium, Low cost)
-   └── Multi-Model LLM (Complex, Higher cost)
-         ├── GPT-4o-mini (Fast & Cheap)
-         ├── Claude Sonnet 4 (High Quality)
-         └── Groq Llama 3.3 (Ultra-fast)
-   ↓
-Response Output
+                 --------------
+                 | User Query |
+                 --------------
+                       ↓
+                ----------------
+                | Query Router |
+                ----------------
+                       ↓
+--------------    --------------    ------------------
+| Rule-Based |    | RAG Module |    |   LLM Module   |
+--------------    --------------    ------------------
+                                    | GPT-4o-mini    |
+                                    | Claude Sonnet 4|
+                                    | Groq Llama 3.3 |
+                                    ------------------
+                        ↓
+              -------------------
+              || Response Output ||
+              -------------------
 ```
+
+![AI Academic Advising Chatbot Model](assets/System_Arch_Diag.png)
 
 ## Key Features
 
@@ -89,8 +103,9 @@ nyit_student_advising/
 │   └── .env                       # Environment variables (ignored)
 ├── data/
 │   └── *.jsonl                    # Knowledge base files
-├── tests/
-│   └── test_queries.json
+├── assets/
+│   ├── demo.gif                   #Demo chatbot GIF
+│   └── System_Arch_Diag.png
 ├── run_chatbot.py                 # Interactive chatbot client
 ├── .gitignore
 ├── README.md
@@ -118,7 +133,7 @@ cd nyit-ai-chatbot/backend
 
 # Create virtual environment
 python -m venv venv
-venv\Scripts\activate 
+venv\Scripts\activate
 
 # Install dependencies
 pip install -r requirements.txt
@@ -182,22 +197,17 @@ Results saved to `backed/benchmark_tests/results/` and charts to `/backed/genera
 
 See [docs/AWS_EC2_DEPLOYMENT](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) for detailed deployment guide.
 
-Quick deploy:
-
-## AWS EC2 t3.micro instance (AWS free tier)
-
-## OS: Ubuntu 24.04 LTS, 2 vCPUs, 1GB RAM
-
-
-# AWS EC2 key
-Generate the AWS EC2 key from the website and add it to the root directory <<key-name>>.pem
+- AWS EC2 t3.micro instance (AWS free tier)
+- OS: Ubuntu 24.04 LTS, 2 vCPUs, 1GB RAM
+- Generate AWS EC2 private key and add it in the root directory ~/your_key_name.pem
+- Copy/edit all essential files in proper paths after installing the OS on AWS
 
 ```bash
 # AWS EC2
 git clone https://github.com/utsinboots/nyit-student-advising-chatbot
 
 # Connect to AWS EC2 after running the EC2 instance
-ssh -i ~/root/nyit_student_advising/nyit-student-advising-key.pem ubuntu@<<instance IP address>>
+ssh -i ~/nyit_student_advising/nyit-student-advising-key.pem ubuntu@_public_IPv4_address_
 cd ~/nyit-student-advising-chatbot/backend
 source venv/bin/activate
 pip install -r requirements.txt
@@ -216,7 +226,7 @@ python run.py
 
 **Utshant Gurung**  
 M.S. Computer Science
-New York Institute of Technology, NY
+New York Institute of Technology
 December 2025
 
 ## References
