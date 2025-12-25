@@ -1,5 +1,5 @@
 """
-Enhanced Multi-Model Benchmark with Quality Metrics
+Enhanced Multi-Model Benchmark with Quality and Performance Metrics
 Adds: Relevance scoring, completeness, factual accuracy, readability
 """
 
@@ -79,6 +79,10 @@ TEST_QUERIES = [
 def calculate_quality_metrics(answer: str, query_info: dict) -> dict:
     """Calculate various quality metrics for the answer"""
     
+    #--------------------------
+    #Benchmark Quality Metrics
+    #--------------------------
+
     # 1. Completeness - How many expected elements are mentioned
     expected_elements = query_info.get('expected_elements', [])
     mentioned_elements = sum(1 for elem in expected_elements if elem.lower() in answer.lower())
@@ -93,7 +97,7 @@ def calculate_quality_metrics(answer: str, query_info: dict) -> dict:
         avg_sentence_length = words / sentences
         avg_syllables_per_word = syllables / words
         readability = 206.835 - 1.015 * avg_sentence_length - 84.6 * avg_syllables_per_word
-        readability = max(0, min(100, readability))  # Clamp to 0-100
+        readability = max(0, min(100, readability))  
     else:
         readability = 50
     
@@ -201,16 +205,16 @@ def test_model_with_query(query_info: dict, model: dict) -> dict:
         }
 
 def run_enhanced_benchmark():
-    """Run enhanced benchmark with quality metrics"""
+    """Run enhanced benchmark with performance and quality metrics"""
     
     print("\n" + "="*80)
-    print("🔬 ENHANCED MULTI-MODEL BENCHMARK WITH QUALITY METRICS")
+    print("  ENHANCED MULTI-MODEL BENCHMARK WITH PERFORMANCE AND QUALITY METRICS")
     print("="*80)
     print(f"\nTesting {len(MODELS_TO_TEST)} models with {len(TEST_QUERIES)} queries")
     print("\nMetrics tracked:")
-    print("  📊 Performance: Latency, Cost, Throughput")
-    print("  ✨ Quality: Completeness, Readability, Structure")
-    print("  🎯 Content: Specificity, Actionability, Examples")
+    print("    Performance: Latency, Cost, Throughput")
+    print("    Quality: Completeness, Readability, Structure")
+    print("    Content: Specificity, Actionability, Examples")
     print("\n" + "="*80 + "\n")
     
     all_results = []
@@ -233,22 +237,22 @@ def run_enhanced_benchmark():
         }
         
         for model in MODELS_TO_TEST:
-            print(f"\n📡 Testing {model['display_name']}...", end=" ", flush=True)
+            print(f"\n Testing {model['display_name']}...", end=" ", flush=True)
             
             result = test_model_with_query(query_info, model)
             query_results['models'][model['name']] = result
             
             if result['success']:
-                print(f"✅")
-                print(f"   ⚡ Latency: {result['latency_ms']:.0f}ms ({result['tokens_per_second']:.1f} tok/s)")
-                print(f"   💰 Cost: ${result['cost']:.6f} (${result['cost_per_token']:.8f}/token)")
-                print(f"   📝 Length: {result['word_count']} words, {result['sentence_count']} sentences")
-                print(f"   ✨ Quality: Completeness {result['completeness_score']:.0%}, Readability {result['readability_score']:.0f}")
-                print(f"   🎯 Features: {'✓' if result['has_actionable_steps'] else '✗'} Steps, "
-                      f"{'✓' if result['has_examples'] else '✗'} Examples, "
-                      f"{'✓' if result['has_structure'] else '✗'} Structure")
+                print(f"Success")
+                print(f"     Latency: {result['latency_ms']:.0f}ms ({result['tokens_per_second']:.1f} tok/s)")
+                print(f"     Cost: ${result['cost']:.6f} (${result['cost_per_token']:.8f}/token)")
+                print(f"     Length: {result['word_count']} words, {result['sentence_count']} sentences")
+                print(f"     Quality: Completeness {result['completeness_score']:.0%}, Readability {result['readability_score']:.0f}")
+                print(f"     Features: {'Yes' if result['has_actionable_steps'] else 'No'} Steps, "
+                      f"{'Yes' if result['has_examples'] else 'No'} Examples, "
+                      f"{'Yes' if result['has_structure'] else 'No'} Structure")
             else:
-                print(f"❌ Failed: {result.get('error', 'Unknown')[:60]}")
+                print(f" Failed: {result.get('error', 'Unknown')[:60]}")
             
             time.sleep(1)
         
@@ -262,7 +266,7 @@ def run_enhanced_benchmark():
         json.dump(all_results, indent=2, fp=f)
     
     print("\n" + "="*80)
-    print(f"💾 Results saved to: {results_file}")
+    print(f" Results saved to: {results_file}")
     print("="*80)
     
     # Generate enhanced summary
@@ -274,7 +278,7 @@ def generate_enhanced_summary(results):
     """Generate comprehensive summary with quality metrics"""
     
     print("\n" + "="*80)
-    print("📊 ENHANCED BENCHMARK SUMMARY")
+    print(" ENHANCED BENCHMARK SUMMARY")
     print("="*80 + "\n")
     
     # Aggregate by model
@@ -356,7 +360,7 @@ def generate_enhanced_summary(results):
         print(f"{stats['display_name']:<25} {steps_pct:>10.0f}% {examples_pct:>13.0f}% {structure_pct:>13.0f}%")
     
     print("\n" + "="*80)
-    print("\n🏆 CATEGORY WINNERS:\n")
+    print("\n CATEGORY WINNERS:\n")
     
     # Determine winners
     fastest = min(model_stats.items(), key=lambda x: sum(x[1]['latencies'])/len(x[1]['latencies']))
@@ -365,27 +369,23 @@ def generate_enhanced_summary(results):
     most_readable = max(model_stats.items(), key=lambda x: sum(x[1]['readability_scores'])/len(x[1]['readability_scores']))
     fastest_throughput = max(model_stats.items(), key=lambda x: sum(x[1]['tokens_per_second'])/len(x[1]['tokens_per_second']))
     
-    print(f"⚡ Fastest Response: {fastest[1]['display_name']}")
-    print(f"🚀 Highest Throughput: {fastest_throughput[1]['display_name']}")
-    print(f"💰 Most Cost-Effective: {cheapest[1]['display_name']}")
-    print(f"✅ Most Complete Answers: {most_complete[1]['display_name']}")
-    print(f"📖 Most Readable: {most_readable[1]['display_name']}")
+    print(f"  Fastest Response: {fastest[1]['display_name']}")
+    print(f"  Highest Throughput: {fastest_throughput[1]['display_name']}")
+    print(f"  Most Cost-Effective: {cheapest[1]['display_name']}")
+    print(f"  Most Complete Answers: {most_complete[1]['display_name']}")
+    print(f"  Most Readable: {most_readable[1]['display_name']}")
     
     print("\n" + "="*80)
 
 def main():
     try:
         results = run_enhanced_benchmark()
-        print("\n✅ Enhanced benchmark complete!")
-        print("\n📈 Next steps:")
-        print("   1. Run 'python generate_enhanced_charts.py' for quality visualizations")
-        print("   2. Use comprehensive metrics in your presentation")
-        print("   3. Discuss quality vs performance trade-offs")
+        print("\n  Enhanced benchmark complete!")
         
     except KeyboardInterrupt:
-        print("\n\n❌ Benchmark cancelled")
+        print("\n\n  Benchmark cancelled")
     except Exception as e:
-        print(f"\n\n❌ Benchmark failed: {e}")
+        print(f"\n\n  Benchmark failed: {e}")
         import traceback
         traceback.print_exc()
 

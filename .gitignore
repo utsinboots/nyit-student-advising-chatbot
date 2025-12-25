@@ -13,6 +13,12 @@ ENV/
 .pytest_cache/
 .coverage
 
+#AWS Key
+*.pem
+
+# Test Client
+test_client.py
+
 # Environment variables (CRITICAL - don't upload API keys!)
 .env
 *.env
@@ -36,17 +42,16 @@ indexes/
 Thumbs.db
 desktop.ini
 
+# KB pretty.json files
+data/kb_pretty_json/
+
 # Logs
 *.log
 logs/
 
-# Test results
-results/
-*.json
-
-# Charts (optional - if too many)
-charts/
-*.png
+# Charts 
+#charts/
+#*.png
 
 # Jupyter
 .ipynb_checkpoints/

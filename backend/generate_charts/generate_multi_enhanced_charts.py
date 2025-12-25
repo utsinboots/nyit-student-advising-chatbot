@@ -7,19 +7,19 @@ Generates charts for quality metrics + performance
 import json
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+from matplotlib.patches import Patch
 from pathlib import Path
 import numpy as np
 from datetime import datetime
 
 # Configuration
-RESULTS_DIR = Path("results")
-CHARTS_DIR = Path("charts_enhanced")
+BACKEND_DIR = Path(__file__).resolve().parents[1]  
+RESULTS_DIR = BACKEND_DIR / "benchmark_tests" / "results"
+CHARTS_DIR = Path(__file__).resolve().parent / "charts_multi_enhanced"
 CHARTS_DIR.mkdir(exist_ok=True)
 
-# Professional color scheme
 MODEL_COLORS = {
     'gpt-4o-mini': '#10A37F',
-    'gpt-4o': '#0E8A6D',
     'claude-sonnet-4-20250514': '#D97757',
     'llama-3.3-70b-versatile': '#6366F1',
 }
@@ -29,12 +29,12 @@ def load_latest_enhanced_results():
     result_files = list(RESULTS_DIR.glob("enhanced_benchmark_*.json"))
     
     if not result_files:
-        print("❌ No enhanced benchmark results found!")
-        print("   Run 'python benchmark_enhanced_quality.py' first")
+        print("   No enhanced benchmark results found!")
+        print("   Run 'python benchmark_multi_enhanced.py' first")
         return None
     
     latest_file = max(result_files, key=lambda p: p.stat().st_mtime)
-    print(f"📂 Loading: {latest_file.name}")
+    print(f"  Loading: {latest_file.name}")
     
     with open(latest_file, 'r', encoding='utf-8') as f:
         results = json.load(f)
@@ -111,7 +111,7 @@ def extract_enhanced_stats(results):
     return model_stats
 
 def chart1_throughput_comparison(model_stats):
-    """NEW: Tokens per second comparison - Groq will dominate!"""
+    """Tokens per second comparison"""
     plt.figure(figsize=(12, 7))
     
     models = list(model_stats.keys())
@@ -140,10 +140,10 @@ def chart1_throughput_comparison(model_stats):
     plt.tight_layout()
     plt.savefig(CHARTS_DIR / '1_throughput_comparison.png', dpi=300, bbox_inches='tight')
     plt.close()
-    print("✓ Saved: 1_throughput_comparison.png")
+    print("  Saved: 1_throughput_comparison.png")
 
 def chart2_quality_radar(model_stats):
-    """NEW: Radar chart for quality metrics"""
+    """Radar chart for quality metrics"""
     fig = plt.figure(figsize=(10, 10))
     ax = fig.add_subplot(111, projection='polar')
     
@@ -182,7 +182,7 @@ def chart2_quality_radar(model_stats):
     plt.tight_layout()
     plt.savefig(CHARTS_DIR / '2_quality_radar.png', dpi=300, bbox_inches='tight')
     plt.close()
-    print("✓ Saved: 2_quality_radar.png")
+    print("  Saved: 2_quality_radar.png")
 
 def chart3_cost_efficiency(model_stats):
     """Cost per token - fair comparison"""
@@ -213,7 +213,7 @@ def chart3_cost_efficiency(model_stats):
     plt.tight_layout()
     plt.savefig(CHARTS_DIR / '3_cost_efficiency.png', dpi=300, bbox_inches='tight')
     plt.close()
-    print("✓ Saved: 3_cost_efficiency.png")
+    print("  Saved: 3_cost_efficiency.png")
 
 def chart4_quality_vs_cost_scatter(model_stats):
     """2D scatter: Quality vs Cost"""
@@ -246,11 +246,11 @@ def chart4_quality_vs_cost_scatter(model_stats):
     
     # Add quadrant labels
     ax = plt.gca()
-    plt.text(0.05, 0.95, '💚 High Quality\nLow Cost\n(IDEAL)', 
+    plt.text(0.05, 0.95, '  High Quality\nLow Cost\n(IDEAL)', 
             transform=ax.transAxes, fontsize=11, verticalalignment='top',
             bbox=dict(boxstyle='round', facecolor='lightgreen', alpha=0.5, edgecolor='darkgreen'))
     
-    plt.text(0.95, 0.05, '❌ Low Quality\nHigh Cost\n(AVOID)', 
+    plt.text(0.95, 0.05, '  Low Quality\nHigh Cost\n(AVOID)', 
             transform=ax.transAxes, fontsize=11, verticalalignment='bottom',
             horizontalalignment='right',
             bbox=dict(boxstyle='round', facecolor='lightcoral', alpha=0.5, edgecolor='darkred'))
@@ -258,7 +258,7 @@ def chart4_quality_vs_cost_scatter(model_stats):
     plt.tight_layout()
     plt.savefig(CHARTS_DIR / '4_quality_vs_cost.png', dpi=300, bbox_inches='tight')
     plt.close()
-    print("✓ Saved: 4_quality_vs_cost.png")
+    print(" Saved: 4_quality_vs_cost.png")
 
 def chart5_content_features(model_stats):
     """Stacked bar chart: Content features"""
@@ -296,61 +296,103 @@ def chart5_content_features(model_stats):
     plt.tight_layout()
     plt.savefig(CHARTS_DIR / '5_content_features.png', dpi=300, bbox_inches='tight')
     plt.close()
-    print("✓ Saved: 5_content_features.png")
+    print("  Saved: 5_content_features.png")
 
 def chart6_performance_summary(model_stats):
-    """Multi-metric grouped bar chart"""
+    """Multi-metric grouped bar chart with color = model, hatch = metric"""
+    
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 7))
     
     models = list(model_stats.keys())
     display_names = [model_stats[m]['display_name'] for m in models]
     colors = [MODEL_COLORS.get(m, '#666666') for m in models]
     
-    # Left: Speed metrics (normalized)
+
+    # Left: Performance metrics
     max_latency = max(np.mean(stats['latencies']) for stats in model_stats.values())
     max_throughput = max(np.mean(stats['tokens_per_second']) for stats in model_stats.values())
     
-    latency_norm = [100 - (np.mean(stats['latencies']) / max_latency * 100) for stats in model_stats.values()]  # Invert
-    throughput_norm = [np.mean(stats['tokens_per_second']) / max_throughput * 100 for stats in model_stats.values()]
+    latency_norm = [
+        100 - (np.mean(stats['latencies']) / max_latency * 100)
+        for stats in model_stats.values()
+    ]
+    throughput_norm = [
+        np.mean(stats['tokens_per_second']) / max_throughput * 100
+        for stats in model_stats.values()
+    ]
     
     x = np.arange(len(models))
     width = 0.35
     
-    ax1.bar(x - width/2, latency_norm, width, label='Speed (lower latency = higher)', color=colors, alpha=0.7)
-    ax1.bar(x + width/2, throughput_norm, width, label='Throughput', color=colors, alpha=0.9)
+    ax1.bar(
+        x - width/2, latency_norm, width,
+        color=colors, hatch='//', alpha=0.8,
+        label='Speed (lower latency = higher)'
+    )
+    ax1.bar(
+        x + width/2, throughput_norm, width,
+        color=colors, hatch='\\\\', alpha=0.9,
+        label='Throughput'
+    )
     
     ax1.set_xlabel('Model', fontsize=12, fontweight='bold')
-    ax1.set_ylabel('Normalized Score (0-100)', fontsize=12, fontweight='bold')
+    ax1.set_ylabel('Normalized Score (0–100)', fontsize=12, fontweight='bold')
     ax1.set_title('Performance Metrics', fontsize=14, fontweight='bold')
     ax1.set_xticks(x)
     ax1.set_xticklabels(display_names, rotation=15, ha='right')
-    ax1.legend()
     ax1.grid(axis='y', alpha=0.3)
     
-    # Right: Quality metrics (normalized)
+    # Custom legend for performance metrics
+    perf_legend = [
+        Patch(facecolor='white', edgecolor='black', hatch='//',
+              label='Speed (lower latency = higher)'),
+        Patch(facecolor='white', edgecolor='black', hatch='\\\\',
+              label='Throughput')
+    ]
+    ax1.legend(handles=perf_legend, loc='upper left')
+    
+
+    # Right: Quality metrics
     completeness_scores = [np.mean(stats['completeness_scores']) * 100 for stats in model_stats.values()]
     readability_scores = [np.mean(stats['readability_scores']) for stats in model_stats.values()]
     specificity_scores = [np.mean(stats['specificity_scores']) * 100 for stats in model_stats.values()]
     
-    x = np.arange(len(models))
     width = 0.25
-    
-    ax2.bar(x - width, completeness_scores, width, label='Completeness', color=colors, alpha=0.7)
-    ax2.bar(x, readability_scores, width, label='Readability', color=colors, alpha=0.8)
-    ax2.bar(x + width, specificity_scores, width, label='Specificity', color=colors, alpha=0.9)
+    ax2.bar(
+        x - width, completeness_scores, width,
+        color=colors, hatch='//', alpha=0.8,
+        label='Completeness'
+    )
+    ax2.bar(
+        x, readability_scores, width,
+        color=colors, hatch='..', alpha=0.8,
+        label='Readability'
+    )
+    ax2.bar(
+        x + width, specificity_scores, width,
+        color=colors, hatch='xx', alpha=0.9,
+        label='Specificity'
+    )
     
     ax2.set_xlabel('Model', fontsize=12, fontweight='bold')
     ax2.set_ylabel('Score', fontsize=12, fontweight='bold')
     ax2.set_title('Quality Metrics', fontsize=14, fontweight='bold')
     ax2.set_xticks(x)
     ax2.set_xticklabels(display_names, rotation=15, ha='right')
-    ax2.legend()
     ax2.grid(axis='y', alpha=0.3)
+    
+    # Custom legend for quality metrics
+    quality_legend = [
+        Patch(facecolor='white', edgecolor='black', hatch='//', label='Completeness'),
+        Patch(facecolor='white', edgecolor='black', hatch='..', label='Readability'),
+        Patch(facecolor='white', edgecolor='black', hatch='xx', label='Specificity')
+    ]
+    ax2.legend(handles=quality_legend, loc='upper left')
     
     plt.tight_layout()
     plt.savefig(CHARTS_DIR / '6_performance_summary.png', dpi=300, bbox_inches='tight')
     plt.close()
-    print("✓ Saved: 6_performance_summary.png")
+    print("  Saved: 6_performance_summary.png")
 
 def chart7_comprehensive_table(model_stats):
     """Summary table with all key metrics"""
@@ -401,11 +443,11 @@ def chart7_comprehensive_table(model_stats):
     
     plt.savefig(CHARTS_DIR / '7_summary_table.png', dpi=300, bbox_inches='tight')
     plt.close()
-    print("✓ Saved: 7_summary_table.png")
+    print("  Saved: 7_summary_table.png")
 
 def main():
     print("\n" + "="*70)
-    print("📊 Enhanced Multi-Model Chart Generator")
+    print("  Enhanced Multi-Model Chart Generator")
     print("="*70 + "\n")
     
     results = load_latest_enhanced_results()
@@ -418,10 +460,10 @@ def main():
     model_stats = extract_enhanced_stats(results)
     
     if not model_stats:
-        print("❌ No successful model results found!")
+        print("  No successful model results found!")
         return
     
-    print(f"\n✓ Found {len(model_stats)} models with results\n")
+    print(f"\nFound {len(model_stats)} models with results\n")
     print("Generating enhanced comparison charts...\n")
     
     # Generate all enhanced charts
@@ -434,10 +476,10 @@ def main():
     chart7_comprehensive_table(model_stats)
     
     print("\n" + "="*70)
-    print(f"✅ All enhanced charts saved to: {CHARTS_DIR}/")
+    print(f"  All enhanced charts saved to: {CHARTS_DIR}/")
     print("="*70)
     
-    print("\n📊 Generated Charts:")
+    print("\n  Generated Charts:")
     print("  1. throughput_comparison.png - Generation speed (tok/s)")
     print("  2. quality_radar.png - Multi-dimensional quality view")
     print("  3. cost_efficiency.png - Cost per million tokens")
@@ -446,7 +488,6 @@ def main():
     print("  6. performance_summary.png - Performance + quality side-by-side")
     print("  7. summary_table.png - Complete comparison table")
     
-    print("\n🌟 Use these for your capstone presentation!")
     print("\nKey insights to highlight:")
     
     # Print winners
@@ -457,9 +498,9 @@ def main():
     highest_quality = max(model_stats.items(),
                          key=lambda x: np.mean(x[1]['completeness_scores']))
     
-    print(f"  🚀 Fastest generation: {fastest_throughput[1]['display_name']}")
-    print(f"  💰 Most cost-effective: {cheapest[1]['display_name']}")
-    print(f"  ⭐ Highest quality: {highest_quality[1]['display_name']}")
+    print(f" Fastest generation: {fastest_throughput[1]['display_name']}")
+    print(f" Most cost-effective: {cheapest[1]['display_name']}")
+    print(f" Highest quality: {highest_quality[1]['display_name']}")
 
 if __name__ == "__main__":
     main()

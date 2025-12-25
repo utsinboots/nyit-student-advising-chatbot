@@ -28,36 +28,3 @@ groq>=0.11.0
 # For data analysis/benchmarking
 pandas
 matplotlib
-# seaborn
-
-# For Streamlit frontend
-# streamlit
-
-# Development tools
-# pytest
-# black
-# ruff
-
-
-# For OpenAI API 
-# openai==1.10.0
-# httpx==0.26.0
-# tenacity==8.2.3
-
-# For pandas data analysis
-# pandas==2.1.4
-
-# For NLTK text processing 
-# nltk==3.8.1
-
-# For development tools
-# pytest==7.4.4
-# pytest-asyncio==0.23.3
-# black==24.1.1
-# ruff==0.1.14
-
-# For Streamlit frontend 
-# streamlit==1.30.0
-
-# For better logging
-# loguru==0.7.2

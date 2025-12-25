@@ -36,12 +36,8 @@ class QueryRouter:
         rag_results: List[Dict]
     ) -> Dict:
         """
-        Determine how to handle the query.
-        
-        Improved logic: Checks both intent AND RAG, then decides which is better.
-        
-        Returns:
-            Dict with route decision, confidence, and data to use
+        Handling query routing with improved logic. Checks both intent AND RAG, then decides which is better.
+        Returns: Dict with route decision, confidence, and data to use
         """
         
         top_intent_score = intent_matches[0]["score"] if intent_matches else 0.0
@@ -52,7 +48,7 @@ class QueryRouter:
         has_good_rag = top_rag_score >= self.rag_threshold
         is_complex = self._is_complex_query(query)
 
-        # Decision Logic - IMPROVED
+        # Decision Logic
         
         # Route 1: VERY strong intent (≥0.95) + simple → RULE_BASED
         # This catches only the most confident matches
@@ -69,7 +65,7 @@ class QueryRouter:
                 "is_complex": is_complex,
             }
 
-        # Route 2: Good RAG (≥0.70) + not complex → RAG
+        # Route 2: Good RAG (≥0.55) + not complex → RAG
         # Check RAG BEFORE checking weaker intent matches
         if has_good_rag and not is_complex:
             # If we also have good intent, choose based on which score is higher

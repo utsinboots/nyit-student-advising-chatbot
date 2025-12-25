@@ -1,8 +1,7 @@
 """
-Benchmark Script - Uses Actual Questions from JSONL Files
+Benchmark Test with GPT-4- Uses Actual Questions from JSONL Files
 Automatically generates test queries from your knowledge base
 """
-
 import json
 import time
 import requests
@@ -15,9 +14,7 @@ API_URL = "http://localhost:8000"
 RESULTS_DIR = Path("results")
 RESULTS_DIR.mkdir(exist_ok=True)
 
-# Paths to your data files
-# The benchmark.py is in backend/, but data is in project root
-PROJECT_ROOT = Path(__file__).parent.parent  # Go up from backend/ to project root
+PROJECT_ROOT = Path(__file__).parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
 
 INTENTS_FILE = DATA_DIR / "nyit_advising_kb_intents_expanded.jsonl"
@@ -30,22 +27,6 @@ PRICING = {
     "gpt-4o-mini": {
         "input": 0.00015 / 1000,
         "output": 0.0006 / 1000,
-    },
-    "gpt-3.5-turbo": {
-        "input": 0.0005 / 1000,
-        "output": 0.0015 / 1000,
-    },
-    "gpt-4": {
-        "input": 0.03 / 1000,
-        "output": 0.06 / 1000,
-    },
-    "gpt-4-turbo": {
-        "input": 0.01 / 1000,
-        "output": 0.03 / 1000,
-    },
-    "gpt-4o": {
-        "input": 0.0025 / 1000,
-        "output": 0.01 / 1000,
     }
 }
 
@@ -54,11 +35,11 @@ def load_intent_questions(num_samples=10):
     questions = []
     
     if not INTENTS_FILE.exists():
-        print(f"⚠️  Intent file not found: {INTENTS_FILE}")
+        print(f"   Intent file not found: {INTENTS_FILE}")
         print(f"   Looking for: {INTENTS_FILE.absolute()}")
         return []
     
-    print(f"📖 Reading intents from: {INTENTS_FILE}")
+    print(f"  Reading intents from: {INTENTS_FILE}")
     
     with open(INTENTS_FILE, 'r', encoding='utf-8') as f:
         line_num = 0
@@ -68,7 +49,6 @@ def load_intent_questions(num_samples=10):
                 try:
                     intent = json.loads(line)
                     
-                    # Your JSONL has 'questions' (array) not 'question' (string)
                     questions_list = intent.get('questions', [])
                     
                     if questions_list and isinstance(questions_list, list):
@@ -86,10 +66,10 @@ def load_intent_questions(num_samples=10):
                                 })
                     
                 except json.JSONDecodeError as e:
-                    print(f"   ⚠️  Skipping invalid JSON on line {line_num}")
+                    print(f"     Skipping invalid JSON on line {line_num}")
                     continue
                 except Exception as e:
-                    print(f"   ⚠️  Error on line {line_num}: {e}")
+                    print(f"     Error on line {line_num}: {e}")
                     continue
     
     print(f"   Found {len(questions)} intent-based questions")
@@ -105,11 +85,11 @@ def load_rag_queries(num_samples=8):
     queries = []
     
     if not RAG_CORPUS_FILE.exists():
-        print(f"⚠️  RAG corpus file not found: {RAG_CORPUS_FILE}")
+        print(f"   RAG corpus file not found: {RAG_CORPUS_FILE}")
         print(f"   Looking for: {RAG_CORPUS_FILE.absolute()}")
         return []
     
-    print(f"📖 Reading RAG corpus from: {RAG_CORPUS_FILE}")
+    print(f"  Reading RAG corpus from: {RAG_CORPUS_FILE}")
     
     with open(RAG_CORPUS_FILE, 'r', encoding='utf-8') as f:
         line_num = 0
@@ -119,7 +99,6 @@ def load_rag_queries(num_samples=8):
                 try:
                     doc = json.loads(line)
                     
-                    # Your structure has: title, text, doc_id, source_url
                     title = doc.get('title', '')
                     text = doc.get('text', '')
                     doc_id = doc.get('doc_id', f'line_{line_num}')
@@ -129,7 +108,6 @@ def load_rag_queries(num_samples=8):
                     if not title or not isinstance(title, str):
                         continue
                     
-                    # Extract key phrases from title for better questions
                     # Example: "MSCS overview: total credits and track options"
                     title_lower = title.lower()
                     
@@ -180,10 +158,10 @@ def load_rag_queries(num_samples=8):
                     })
                             
                 except json.JSONDecodeError as e:
-                    print(f"   ⚠️  Skipping invalid JSON on line {line_num}")
+                    print(f"      Skipping invalid JSON on line {line_num}")
                     continue
                 except Exception as e:
-                    print(f"   ⚠️  Error on line {line_num}: {e}")
+                    print(f"      Error on line {line_num}: {e}")
                     continue
     
     print(f"   Found {len(queries)} RAG-based queries")
@@ -225,7 +203,7 @@ def create_complex_queries():
 
 def generate_test_queries(verbose=True):
     """Generate test queries from actual data files"""
-    print("\n📂 Loading test queries from data files...")
+    print("\n  Loading test queries from data files...")
     
     # Load from actual data - increased samples for better coverage
     intent_queries = load_intent_questions(num_samples=12)
@@ -235,20 +213,20 @@ def generate_test_queries(verbose=True):
     # Combine all queries
     all_queries = intent_queries + rag_queries + complex_queries
     
-    print(f"✓ Loaded {len(intent_queries)} queries from intents JSONL")
-    print(f"✓ Generated {len(rag_queries)} queries from RAG corpus")
-    print(f"✓ Created {len(complex_queries)} complex queries")
-    print(f"✓ Total: {len(all_queries)} test queries")
+    print(f" Loaded {len(intent_queries)} queries from intents JSONL")
+    print(f" Generated {len(rag_queries)} queries from RAG corpus")
+    print(f" Created {len(complex_queries)} complex queries")
+    print(f" Total: {len(all_queries)} test queries")
     
     if len(all_queries) == 0:
-        print("\n❌ ERROR: No test queries generated!")
+        print("\n  ERROR: No test queries generated!")
         print("   Check that your JSONL files exist and have data:")
         print(f"   - {INTENTS_FILE}")
         print(f"   - {RAG_CORPUS_FILE}")
     
     # Show sample queries if verbose
     if verbose and all_queries:
-        print("\n📋 Sample queries by category:")
+        print("\n  Sample queries by category:")
         for category in ["Simple FAQ", "Policy/Procedure", "Complex Planning"]:
             cat_queries = [q for q in all_queries if q['category'] == category]
             if cat_queries:
@@ -310,14 +288,14 @@ def run_benchmark():
     """Run the complete benchmark suite"""
     
     print_separator()
-    print("🚀 Starting Benchmark (Using Actual JSONL Data)")
+    print("  Starting Benchmark (Using Actual JSONL Data)")
     print_separator()
     
     # Generate test queries from actual data
     test_queries = generate_test_queries()
     
     if not test_queries:
-        print("❌ No test queries generated! Check your JSONL files.")
+        print("  No test queries generated! Check your JSONL files.")
         return []
     
     print(f"Total queries: {len(test_queries)}")
@@ -388,8 +366,8 @@ def run_benchmark():
             results.append(result)
             
             # Print summary
-            match_icon = "✓" if route_matched else "✗"
-            print(f"{match_icon} Route: {route_used} " + 
+            match_text = "Yes" if route_matched else "No"
+            print(f"{match_text} Route: {route_used} " + 
                   (f"(Expected: {test['expected_route']})" if not route_matched else ""))
             print(f"  Confidence: {result['confidence']:.2f}")
             print(f"  Latency: {result['latency_ms']:.0f}ms")
@@ -399,7 +377,7 @@ def run_benchmark():
             else:
                 print(f"  Cost: $0 (no API call)")
         else:
-            print("✗ Failed to get response")
+            print(" Failed to get response")
             results.append({
                 "timestamp": datetime.now().isoformat(),
                 "query": test['query'],
@@ -419,7 +397,7 @@ def run_benchmark():
         json.dump(results, indent=2, fp=f)
     
     print_separator()
-    print(f"✓ Results saved to: {results_file}")
+    print(f" Results saved to: {results_file}")
     print_separator()
     
     # Print summary
@@ -430,14 +408,14 @@ def run_benchmark():
 def print_summary(results: list):
     """Print summary statistics"""
     
-    print("\n📊 Benchmark Summary")
+    print("\n  Benchmark Summary")
     print_separator()
     
     successful = [r for r in results if 'status' not in r]
     failed = [r for r in results if 'status' in r]
     
     if not successful:
-        print("❌ No successful queries!")
+        print("  No successful queries!")
         return
     
     total = len(results)
@@ -502,12 +480,11 @@ def main():
     """Main entry point"""
     try:
         results = run_benchmark()
-        print("\n✅ Benchmark complete!")
-        print("📊 Run 'python generate_charts_v2.py' to create visualizations")
+        print("\n  Benchmark complete!")
     except KeyboardInterrupt:
-        print("\n\n❌ Benchmark cancelled by user")
+        print("\n\n  Benchmark cancelled by user")
     except Exception as e:
-        print(f"\n\n❌ Benchmark failed: {e}")
+        print(f"\n\n  Benchmark failed: {e}")
         import traceback
         traceback.print_exc()
 

@@ -1,5 +1,5 @@
 """
-Complete Multi-Provider LLM Service
+Multi-Provider LLM Service
 Supports: OpenAI, Anthropic (Claude), and Groq
 """
 

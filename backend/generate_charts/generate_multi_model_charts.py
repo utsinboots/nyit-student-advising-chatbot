@@ -1,8 +1,7 @@
 """
 Multi-Model Comparison Chart Generator
-Creates professional comparison charts for multi-model benchmarks
+Creates comparison charts for multi-model benchmarks
 """
-
 import json
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
@@ -11,11 +10,11 @@ import numpy as np
 from datetime import datetime
 
 # Configuration
-RESULTS_DIR = Path("results")
-CHARTS_DIR = Path("charts_multi_model")
+BACKEND_DIR = Path(__file__).resolve().parents[1]  
+RESULTS_DIR = BACKEND_DIR / "benchmark_tests" / "results"
+CHARTS_DIR = Path(__file__).resolve().parent / "charts_multi_enhanced"
 CHARTS_DIR.mkdir(exist_ok=True)
 
-# Professional color scheme for each provider
 PROVIDER_COLORS = {
     'openai': '#10A37F',      # OpenAI green
     'anthropic': '#D97757',   # Anthropic orange
@@ -36,12 +35,12 @@ def load_latest_multi_model_results():
     result_files = list(RESULTS_DIR.glob("multi_model_benchmark_*.json"))
     
     if not result_files:
-        print("❌ No multi-model benchmark results found!")
-        print("   Run 'python benchmark_multi_model_verified.py' first")
+        print(" No multi-model benchmark results found!")
+        print(" Run 'python benchmark_multi_model_.py' first")
         return None
     
     latest_file = max(result_files, key=lambda p: p.stat().st_mtime)
-    print(f"📂 Loading: {latest_file.name}")
+    print(f" Loading: {latest_file.name}")
     
     with open(latest_file, 'r', encoding='utf-8') as f:
         results = json.load(f)
@@ -116,7 +115,7 @@ def generate_latency_comparison(model_stats):
     chart_path = CHARTS_DIR / 'latency_comparison.png'
     plt.savefig(chart_path, dpi=300, bbox_inches='tight')
     plt.close()
-    print(f"✓ Saved: {chart_path}")
+    print(f"Saved: {chart_path}")
 
 def generate_cost_comparison(model_stats):
     """Chart 2: Cost comparison across models"""
@@ -141,7 +140,7 @@ def generate_cost_comparison(model_stats):
         for bar in bars:
             height = bar.get_height()
             plt.text(bar.get_x() + bar.get_width()/2, height,
-                    f'${height:.5f}', ha='center', va='bottom', fontsize=9, fontweight='bold')
+                     f'${height:.5f}', ha='center', va='bottom', fontsize=9, fontweight='bold')
     
     plt.xlabel('Model', fontsize=12, fontweight='bold')
     plt.ylabel('Cost (USD)', fontsize=12, fontweight='bold')
@@ -154,7 +153,7 @@ def generate_cost_comparison(model_stats):
     chart_path = CHARTS_DIR / 'cost_comparison.png'
     plt.savefig(chart_path, dpi=300, bbox_inches='tight')
     plt.close()
-    print(f"✓ Saved: {chart_path}")
+    print(f"Saved: {chart_path}")
 
 def generate_cost_per_1k_tokens(model_stats):
     """Chart 3: Cost efficiency (cost per 1000 tokens)"""
@@ -187,7 +186,7 @@ def generate_cost_per_1k_tokens(model_stats):
     chart_path = CHARTS_DIR / 'cost_per_1k_tokens.png'
     plt.savefig(chart_path, dpi=300, bbox_inches='tight')
     plt.close()
-    print(f"✓ Saved: {chart_path}")
+    print(f"Saved: {chart_path}")
 
 def generate_tokens_comparison(model_stats):
     """Chart 4: Token usage comparison"""
@@ -227,7 +226,7 @@ def generate_tokens_comparison(model_stats):
     chart_path = CHARTS_DIR / 'tokens_comparison.png'
     plt.savefig(chart_path, dpi=300, bbox_inches='tight')
     plt.close()
-    print(f"✓ Saved: {chart_path}")
+    print(f"Saved: {chart_path}")
 
 def generate_scatter_cost_vs_latency(model_stats):
     """Chart 5: Scatter plot - Cost vs Latency trade-off"""
@@ -269,7 +268,7 @@ def generate_scatter_cost_vs_latency(model_stats):
     chart_path = CHARTS_DIR / 'cost_vs_latency_scatter.png'
     plt.savefig(chart_path, dpi=300, bbox_inches='tight')
     plt.close()
-    print(f"✓ Saved: {chart_path}")
+    print(f"Saved: {chart_path}")
 
 def generate_answer_quality_proxy(model_stats):
     """Chart 6: Answer length as quality proxy"""
@@ -296,7 +295,7 @@ def generate_answer_quality_proxy(model_stats):
     chart_path = CHARTS_DIR / 'answer_length_comparison.png'
     plt.savefig(chart_path, dpi=300, bbox_inches='tight')
     plt.close()
-    print(f"✓ Saved: {chart_path}")
+    print(f"Saved: {chart_path}")
 
 def generate_performance_radar(model_stats):
     """Chart 7: Radar chart comparing multiple dimensions"""
@@ -351,7 +350,7 @@ def generate_performance_radar(model_stats):
     chart_path = CHARTS_DIR / 'performance_radar.png'
     plt.savefig(chart_path, dpi=300, bbox_inches='tight')
     plt.close()
-    print(f"✓ Saved: {chart_path}")
+    print(f" Saved: {chart_path}")
 
 def generate_summary_table_chart(model_stats):
     """Chart 8: Summary comparison table as image"""
@@ -401,11 +400,11 @@ def generate_summary_table_chart(model_stats):
     chart_path = CHARTS_DIR / 'summary_table.png'
     plt.savefig(chart_path, dpi=300, bbox_inches='tight')
     plt.close()
-    print(f"✓ Saved: {chart_path}")
+    print(f" Saved: {chart_path}")
 
 def main():
     print("\n" + "="*70)
-    print("📊 Multi-Model Comparison Chart Generator")
+    print(" Multi-Model Comparison Chart Generator")
     print("="*70 + "\n")
     
     results = load_latest_multi_model_results()
@@ -418,10 +417,10 @@ def main():
     model_stats = extract_model_stats(results)
     
     if not model_stats:
-        print("❌ No successful model results found!")
+        print(" No successful model results found!")
         return
     
-    print(f"\n✓ Found {len(model_stats)} models with results\n")
+    print(f"\n Found {len(model_stats)} models with results\n")
     print("Generating comparison charts...\n")
     
     # Generate all charts
@@ -435,10 +434,10 @@ def main():
     generate_summary_table_chart(model_stats)
     
     print("\n" + "="*70)
-    print(f"✅ All charts saved to: {CHARTS_DIR}/")
+    print(f"All charts saved to: {CHARTS_DIR}/")
     print("="*70)
     
-    print("\n📊 Generated Charts:")
+    print("\n Generated Charts:")
     print("  1. latency_comparison.png - Response speed comparison")
     print("  2. cost_comparison.png - API cost comparison")
     print("  3. cost_per_1k_tokens.png - Cost efficiency")
@@ -447,8 +446,6 @@ def main():
     print("  6. answer_length_comparison.png - Verbosity comparison")
     print("  7. performance_radar.png - Multi-dimensional view")
     print("  8. summary_table.png - Complete summary table")
-    
-    print("\n✨ Use these charts in your capstone presentation!")
 
 if __name__ == "__main__":
     main()

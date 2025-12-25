@@ -14,24 +14,24 @@ def print_separator():
 
 def test_health():
     """Test health endpoint"""
-    print("🏥 Testing Health Check...")
+    print("  Testing Health Check...")
     try:
         response = requests.get(f"{API_BASE_URL}/health", timeout=5)
         if response.status_code == 200:
             data = response.json()
-            print("✓ Server is healthy!")
+            print("  Server is healthy!")
             print(f"  Intents loaded: {data['config']['intents_loaded']}")
             print(f"  Documents loaded: {data['config']['documents_loaded']}")
             return True
         else:
-            print(f"✗ Server returned status {response.status_code}")
+            print(f"Server returned status {response.status_code}")
             return False
     except requests.exceptions.ConnectionError:
-        print("✗ Cannot connect to server. Is it running?")
+        print("  Cannot connect to server. Is it running?")
         print("  Start with: cd backend && python run.py")
         return False
     except Exception as e:
-        print(f"✗ Error: {e}")
+        print(f"  Error: {e}")
         return False
 
 def chat(query: str, include_debug: bool = False) -> Dict:
@@ -94,49 +94,49 @@ def test_rag(query: str, top_k: int = 5):
 def display_response(response: Dict):
     """Pretty print chat response"""
     print("\n" + "─"*70)
-    print("💬 ANSWER:")
+    print("  ANSWER:")
     print("─"*70)
     print(response['answer'])
     
     print("\n" + "─"*70)
-    print("📊 METADATA:")
+    print("  METADATA:")
     print("─"*70)
     print(f"Route Used: {response['route_used']}")
     print(f"Confidence: {response['confidence']:.2f}")
     print(f"Latency: {response['latency_ms']:.0f}ms")
     
     if response.get('sources'):
-        print("\n📚 SOURCES:")
+        print("\n  SOURCES:")
         for i, source in enumerate(response['sources'], 1):
             print(f"{i}. {source.get('source_name', 'Unknown')}")
             if 'url' in source:
                 print(f"   {source['url']}")
     
     if response.get('follow_up_questions'):
-        print("\n🔍 FOLLOW-UP QUESTIONS:")
+        print("\n  FOLLOW-UP QUESTIONS:")
         for q in response['follow_up_questions']:
-            print(f"  • {q}")
+            print(f"    {q}")
     
     if response.get('debug_info'):
-        print("\n🐛 DEBUG INFO:")
+        print("\n DEBUG INFO:")
         debug = response['debug_info']
         
         if debug.get('intent_matches'):
             print("\nIntent Matches:")
             for match in debug['intent_matches'][:3]:
-                print(f"  • {match['intent_id']}")
+                print(f"    {match['intent_id']}")
                 print(f"    Score: {match['score']:.2f} | Type: {match['match_type']}")
         
         if debug.get('rag_results'):
             print("\nRAG Results:")
             for result in debug['rag_results'][:3]:
-                print(f"  • {result['title']}")
+                print(f"    {result['title']}")
                 print(f"    Score: {result['score']:.2f}")
 
 def run_test_suite():
     """Run predefined test queries"""
     print_separator()
-    print("🧪 Running Test Suite")
+    print(" Running Test Suite")
     print_separator()
     
     test_queries = [
@@ -171,9 +171,9 @@ def run_test_suite():
         response = chat(test['query'], include_debug=True)
         
         if response:
-            print(f"✓ Route: {response['route_used']}")
-            print(f"✓ Confidence: {response['confidence']:.2f}")
-            print(f"✓ Latency: {response['latency_ms']:.0f}ms")
+            print(f" Route: {response['route_used']}")
+            print(f" Confidence: {response['confidence']:.2f}")
+            print(f" Latency: {response['latency_ms']:.0f}ms")
             
             results.append({
                 "query": test['query'],
@@ -183,7 +183,7 @@ def run_test_suite():
                 "latency_ms": response['latency_ms']
             })
         else:
-            print("✗ Failed")
+            print(" Failed")
             results.append({
                 "query": test['query'],
                 "category": test['category'],
@@ -194,7 +194,7 @@ def run_test_suite():
     
     # Summary
     print_separator()
-    print("📊 Test Summary")
+    print(" Test Summary")
     print_separator()
     
     if results:
@@ -214,7 +214,7 @@ def run_test_suite():
 def interactive_mode():
     """Interactive chat mode"""
     print_separator()
-    print("💬 Interactive Chat Mode")
+    print(" Interactive Chat Mode")
     print("Type 'quit' to exit, 'debug' to toggle debug mode")
     print_separator()
     
@@ -228,7 +228,7 @@ def interactive_mode():
                 continue
             
             if query.lower() == 'quit':
-                print("Goodbye! 👋")
+                print("Goodbye!")
                 break
             
             if query.lower() == 'debug':
@@ -244,14 +244,14 @@ def interactive_mode():
                 print("✗ Failed to get response")
                 
         except KeyboardInterrupt:
-            print("\n\nGoodbye! 👋")
+            print("\n\nGoodbye!")
             break
 
 def main():
     """Main menu"""
-    print("\n" + "🤖"*35)
+    print("\n" + "-"*35)
     print("  NYIT Academic Chatbot - Test Client")
-    print("🤖"*35)
+    print("-"*35)
     
     # First, check if server is running
     if not test_health():
@@ -281,7 +281,7 @@ def main():
             if query:
                 result = test_intent(query)
                 if result:
-                    print("\n🎯 Intent Matches:")
+                    print("\n Intent Matches:")
                     for match in result.get('matches', []):
                         print(f"\n• {match['intent_id']}")
                         print(f"  Score: {match['score']:.2f}")
@@ -293,7 +293,7 @@ def main():
             if query:
                 result = test_rag(query)
                 if result:
-                    print("\n📚 RAG Results:")
+                    print("\n RAG Results:")
                     for i, doc in enumerate(result.get('results', []), 1):
                         print(f"\n{i}. {doc['title']}")
                         print(f"   Score: {doc['score']:.2f}")
@@ -303,7 +303,7 @@ def main():
             test_health()
         
         elif choice == '6':
-            print("Goodbye! 👋")
+            print("Goodbye!")
             break
         
         else:

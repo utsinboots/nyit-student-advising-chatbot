@@ -56,21 +56,21 @@ async def startup_event():
     
     intents_path = settings.DATA_DIR / "nyit_advising_kb_intents_expanded.jsonl"
     intent_matcher = IntentMatcher(intents_path)
-    print(f"✓ Loaded {len(intent_matcher.intents_db)} intents")
+    print(f"  Loaded {len(intent_matcher.intents_db)} intents")
     
     corpus_path = settings.DATA_DIR / "nyit_rag_corpus_expanded.jsonl"
     index_path = settings.INDEX_DIR / "rag_index"
     rag_service = RAGService(corpus_path=corpus_path, index_path=index_path)
-    print(f"✓ Loaded {len(rag_service.documents)} documents")
+    print(f"  Loaded {len(rag_service.documents)} documents")
     
     query_router = QueryRouter(
         intent_threshold=settings.INTENT_SIMILARITY_THRESHOLD,
         rag_threshold=settings.RAG_SIMILARITY_THRESHOLD
     )
-    print("✓ Initialized query router")
+    print("  Initialized query router")
     
     llm_service = LLMService()
-    print("✓ Initialized LLM service")
+    print("  Initialized LLM service")
     
     print("Services ready!")
 
@@ -177,7 +177,7 @@ async def generate_response(query: str, route_decision: Dict, intent_matches: Li
         if not rag_results:
             # Fallback if no RAG results
             return {
-                'answer': "I couldn't find specific information about that. Please contact advising@nyit.edu or call 516.686.7575 for assistance.",
+                'answer': "I couldn't find specific information about that. Please contact NYIT office or your advisor for answers.",
                 'sources': [],
                 'follow_up': []
             }
@@ -251,7 +251,7 @@ async def generate_response(query: str, route_decision: Dict, intent_matches: Li
                 }
             else:
                 return {
-                    'answer': "I'm having trouble processing your request right now. Please contact advising@nyit.edu or call 516.686.7575 for assistance.",
+                    'answer': "I'm having trouble processing your request right now. Please contact NYIT office or your advisor for answers.",
                     'sources': [],
                     'follow_up': []
                 }
