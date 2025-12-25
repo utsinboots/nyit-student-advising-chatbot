@@ -14,29 +14,7 @@ This project implements a hybrid AI acadeimc advising chatbot that intelligently
 - **RAG (Retrieval-Augmented Generation)** for context-aware answers
 - **Multi-model LLM routing** for complex reasoning
 
-## System Architecture
-
-```
-                 --------------
-                 | User Query |
-                 --------------
-                       ↓
-                ----------------
-                | Query Router |
-                ----------------
-                       ↓
---------------    --------------    ------------------
-| Rule-Based |    | RAG Module |    |   LLM Module   |
---------------    --------------    ------------------
-                                    | GPT-4o-mini    |
-                                    | Claude Sonnet 4|
-                                    | Groq Llama 3.3 |
-                                    ------------------
-                        ↓
-              -------------------
-              || Response Output ||
-              -------------------
-```
+## AI Academic Advising Chatbot Model
 
 ![AI Academic Advising Chatbot Model](assets/System_Arch_Diag.png)
 
