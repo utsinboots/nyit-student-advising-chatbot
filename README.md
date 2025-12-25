@@ -1,28 +1,30 @@
 # NYIT AI Academic Advisor Chatbot
 
-An intelligent academic advising chatbot system with hybrid routing architecture for NYIT's Computer Science M.S. program.
+A hybrid AI academic advising chatbot with confidence-based query routing model
 
 ## Project Overview
 
-This capstone project implements a hybrid AI acadeimc advising chatbot that intelligently routes student queries through three specialized systems:
+This project implements a hybrid AI acadeimc advising chatbot that intelligently routes queries through three specialized modules:
 
 - **Rule-based routing** for quick FAQ responses
 - **RAG (Retrieval-Augmented Generation)** for context-aware answers
 - **Multi-model LLM routing** for complex reasoning
 
-## Architecture
+## System Architecture
 
+```
 User Query
-↓
+   ↓
 Query Router
-├── Rule-Based (Fast, $0)
-├── RAG + Embeddings (Medium, Low cost)
-└── Multi-Model LLM (Complex, Higher cost)
-├── GPT-4o-mini (Fast & cheap)
-├── Claude Sonnet 4 (High quality)
-└── Groq Llama 3.3 (Ultra-fast)
-↓
+   ├── Rule-Based (Fast, $0)
+   ├── RAG + Embeddings (Medium, Low cost)
+   └── Multi-Model LLM (Complex, Higher cost)
+         ├── GPT-4o-mini (Fast & Cheap)
+         ├── Claude Sonnet 4 (High Quality)
+         └── Groq Llama 3.3 (Ultra-fast)
+   ↓
 Response Output
+```
 
 ## Key Features
 
@@ -38,7 +40,7 @@ Response Output
 - **LLM APIs:** OpenAI (GPT-4o-mini), Anthropic (Claude Sonnet 4), Groq (Llama 3.3)
 - **Vector DB:** FAISS
 - **Embeddings:** OpenAI text-embedding-3-small
-- **Deployment:** AWS EC2 (Ubuntu 24.04)
+- **Cloud Deployment:** AWS EC2 t3.micro (Ubuntu 24.04)
 
 ## Benchmark Results
 
@@ -59,36 +61,41 @@ Response Output
 
 ## Project Structure
 
+## Project Structure
+
+```text
 nyit_student_advising/
 ├── backend/
-│ ├── app/
-│ │ │── routes
-│ │ ├── main.py # FastAPI application
-│ │ ├── config.py # Configuration
-│ │ └── services/
-│ │ ├── router.py # Hybrid routing logic
-│ │ ├── llm_service.py # Multi-model LLM service
-│ │ ├── rag_service.py # RAG with FAISS
-│ │ └── intent_matcher.py # Rule-based matcher
-│ │
-│ │── benchmark_tests
-│ │ │── benchmark_multi_enhanced.py
-│ │ ├── benchmark_multi_model.py
-│ │ ├── benchmark.py
-│ │ └── resutls # Benchmark results
-│ │── generate_charts
-│ │ │── charts_multi_enchanced.py
-│ │ ├── charts_multi_model.py
-│ │ ├── charts_multi_model.py
-│ │ └── charts # Visualization outputs
-│ ├── .env # environment variables
-│ ├── run_server.py # run server
-│ └── requirements.txt
-│── data # JSONL knowledge bases
-│── tests # curated test_query.json
-│── run_chatbot.py # run chatbot client  
-│── .pem # AWS EC2 key
-└── README.md
+│   ├── app/
+│   │   ├── routes/
+│   │   ├── main.py                # FastAPI application
+│   │   ├── config.py              # Configuration
+│   │   └── services/
+│   │       ├── router.py          # Hybrid routing logic
+│   │       ├── llm_service.py     # Multi-model LLM service
+│   │       ├── rag_service.py     # RAG with FAISS
+│   │       └── intent_matcher.py  # Rule-based matcher
+│   ├── benchmark_tests/
+│   │   ├── benchmark_multi_enhanced.py
+│   │   ├── benchmark_multi_model.py
+│   │   ├── benchmark.py
+│   │   └── results/               # Benchmark results
+│   ├── generate_charts/
+│   │   ├── generate_multi_enhanced_charts.py
+│   │   ├── generate_multi_model_charts.py
+│   │   └── charts/                # Visualization outputs
+│   ├── run_server.py              # Run backend server
+│   ├── requirements.txt
+│   └── .env                       # Environment variables (ignored)
+├── data/
+│   └── *.jsonl                    # Knowledge base files
+├── tests/
+│   └── test_queries.json
+├── run_chatbot.py                 # Interactive chatbot client
+├── .gitignore
+├── README.md
+└── *.pem                          # AWS EC2 key
+```
 
 ## Quick Start
 
@@ -111,7 +118,7 @@ cd nyit-ai-chatbot/backend
 
 # Create virtual environment
 python -m venv venv
-venv\Scripts\activate #on Linux/Ubuntu: source venv/bin/activate
+venv\Scripts\activate 
 
 # Install dependencies
 pip install -r requirements.txt
@@ -169,7 +176,7 @@ python generate_multi_enhanced_charts.py
 
 Results saved to `backed/benchmark_tests/results/` and charts to `/backed/generate_charts/..`
 
-## Deployment
+## Cloud Deployment
 
 ### AWS EC2 Deployment
 
@@ -181,11 +188,15 @@ Quick deploy:
 
 ## OS: Ubuntu 24.04 LTS, 2 vCPUs, 1GB RAM
 
+
+# AWS EC2 key
+Generate the AWS EC2 key from the website and add it to the root directory <<key-name>>.pem
+
 ```bash
 # AWS EC2
 git clone https://github.com/utsinboots/nyit-student-advising-chatbot
 
-# Connect to AWS EC2
+# Connect to AWS EC2 after running the EC2 instance
 ssh -i ~/root/nyit_student_advising/nyit-student-advising-key.pem ubuntu@<<instance IP address>>
 cd ~/nyit-student-advising-chatbot/backend
 source venv/bin/activate
@@ -204,7 +215,9 @@ python run.py
 ## Author
 
 **Utshant Gurung**  
-M.S. Computer Science, NYIT December '25
+M.S. Computer Science
+New York Institute of Technology, NY
+December 2025
 
 ## References
 

@@ -12,7 +12,7 @@ from datetime import datetime
 # Configuration
 BACKEND_DIR = Path(__file__).resolve().parents[1]  
 RESULTS_DIR = BACKEND_DIR / "benchmark_tests" / "results"
-CHARTS_DIR = Path(__file__).resolve().parent / "charts_multi_enhanced"
+CHARTS_DIR = Path(__file__).resolve().parent / "charts_multi_model"
 CHARTS_DIR.mkdir(exist_ok=True)
 
 PROVIDER_COLORS = {

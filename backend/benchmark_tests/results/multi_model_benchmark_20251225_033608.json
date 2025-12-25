@@ -1,0 +1,202 @@
+[
+  {
+    "query": "I'm planning to graduate in May 2026. What courses should I take this semester if I have 15 credits left?",
+    "query_id": 1,
+    "timestamp": "2025-12-25T03:33:44.316667",
+    "models": {
+      "gpt-4o-mini": {
+        "success": true,
+        "latency_ms": 8448.302268981934,
+        "input_tokens": 72,
+        "output_tokens": 323,
+        "total_tokens": 395,
+        "cost": 0.00020459999999999999,
+        "answer": "To determine the courses you should take this semester for your M.S. in Computer Science at NYIT, you should first consider the following:\n\n1. **Core Requirements**: Ensure you have completed all core courses required for your program. Typically, these include:\n   - Data Structures and Algorithms\n   - Software Engineering\n   - Operating Systems\n   - Database Management Systems\n\n2. **Electives**: With 15 credits remaining, you can choose a combination of electives and any remaining core courses. Electives may include topics such as:\n   - Artificial Intelligence\n   - Machine Learning\n   - Cybersecurity\n   - Web Development\n   - Mobile Application Development\n\n3. **Capstone or Thesis**: If your program requires a capstone project or thesis, you might want to consider enrolling in that course, as it may carry 3-6 credits. \n\n4. **Course Load**: Typically, graduate courses are 3 credits each. Therefore, you could take 3-5 courses depending on your workload preference.\n\n5. **Check Prerequisites**: Ensure that you meet any prerequisites for the courses you plan to take.\n\n6. **Consult with an Advisor**: It\u2019s always advisable to meet with your academic advisor to confirm your course selection aligns with your graduation plan and career goals.\n\nTo summarize, a balanced semester might include:\n- 1 Core Course (if applicable)\n- 2-3 Electives\n- Capstone/Thesis (if you\u2019re prepared to start it)\n\nMake sure to consult the latest course catalog or academic calendar for specific offerings this semester.",
+        "answer_length": 1508,
+        "model_info": "GPT-4o Mini (openai)"
+      },
+      "claude-sonnet-4-20250514": {
+        "success": true,
+        "latency_ms": 7714.038848876953,
+        "input_tokens": 72,
+        "output_tokens": 316,
+        "total_tokens": 388,
+        "cost": 0.004956,
+        "answer": "To determine which courses to take this semester, it\u2019s important to consider the following factors:\n\n1. **Core Requirements**: Ensure you have completed the core requirements for the M.S. in Computer Science program. Typically, these include foundational courses in algorithms, software engineering, and database systems.\n\n2. **Electives**: Depending on your focus area (e.g., cybersecurity, data science, artificial intelligence), you can select electives that complement your interests and career goals.\n\n3. **Capstone/Thesis**: If your program includes a capstone project or thesis, you may want to enroll in the necessary course this semester, especially if it requires multiple semesters to complete.\n\n4. **Prerequisites**: Check if the courses you are interested in have prerequisites that you need to fulfill first.\n\nFor a total of 15 credits, you might consider taking:\n\n- **Three 3-credit core courses** (if you still have any core requirements left)\n- **Two 3-credit electives**\n- **One 3-credit capstone/thesis course**\n\nHere\u2019s a sample course load:\n\n1. **Core Course**: Advanced Algorithms (3 credits)\n2. **Core Course**: Database Management Systems (3 credits)\n3. **Elective**: Machine Learning (3 credits)\n4. **Elective**: Web Development (3 credits)\n5. **Capstone Course**: Capstone Project I (3 credits)\n\nMake sure to check the course availability for the semester and consult with your academic advisor for personalized guidance and to ensure you meet all graduation requirements.",
+        "answer_length": 1497,
+        "model_info": "Claude Sonnet 4 (anthropic)"
+      },
+      "llama-3.3-70b-versatile": {
+        "success": true,
+        "latency_ms": 8417.915344238281,
+        "input_tokens": 72,
+        "output_tokens": 352,
+        "total_tokens": 424,
+        "cost": 0.00032056,
+        "answer": "To plan your courses for the semester with 15 credits left before graduation in May 2026, you should consider the following steps:\n\n1. **Core Requirements**: Ensure you have completed all core courses required for the M.S. in Computer Science. Typically, these may include:\n\n   - Data Structures and Algorithms\n   - Software Engineering\n   - Database Management Systems\n   - Operating Systems\n   - Computer Networks\n\n2. **Electives**: Depending on your program structure, you may have elective credits to fulfill. Choose courses that align with your interests or career goals. Some popular electives might include:\n\n   - Machine Learning\n   - Cybersecurity\n   - Web Development\n   - Mobile App Development\n   - Artificial Intelligence\n\n3. **Capstone/Thesis**: If your program requires a capstone project or thesis, consider enrolling in that this semester if you meet the prerequisites. This is usually a higher credit course (3-6 credits) and can help fulfill your graduation requirements.\n\n4. **Course Load**: Check the number of credits each course offers. You can typically take 3-5 courses to reach 15 credits, depending on the credit value of each course (usually 3 credits per course).\n\n5. **Academic Policies**: Review any prerequisites for the courses you want to take, and make sure you are in good academic standing to enroll in them. \n\n6. **Consult with an Advisor**: It's always a good idea to consult with an academic advisor to verify your course selections align with your graduation timeline and academic goals.\n\nOnce you have this information, you can finalize your course list for the semester. If you need specific course recommendations, please provide details on any completed courses or areas of interest!",
+        "answer_length": 1728,
+        "model_info": "Groq Llama 3.3 (groq)"
+      }
+    }
+  },
+  {
+    "query": "Should I choose the thesis or non-thesis track if I want to pursue a PhD later?",
+    "query_id": 2,
+    "timestamp": "2025-12-25T03:34:11.908064",
+    "models": {
+      "gpt-4o-mini": {
+        "success": true,
+        "latency_ms": 8121.025323867798,
+        "input_tokens": 67,
+        "output_tokens": 257,
+        "total_tokens": 324,
+        "cost": 0.00016424999999999998,
+        "answer": "If you're considering pursuing a PhD later, opting for the thesis track in the NYIT Computer Science M.S. program may be beneficial. Here are a few reasons why:\n\n1. **Research Experience**: The thesis track typically involves conducting original research, which is valuable experience for PhD programs that often require a strong research background.\n\n2. **Depth of Knowledge**: Completing a thesis allows you to dive deeply into a specific area of computer science, demonstrating your ability to engage with complex topics\u2014an essential skill for doctoral studies.\n\n3. **Recommendations**: Working closely with faculty on a thesis can lead to stronger letters of recommendation, as professors can speak to your research capabilities and commitment.\n\n4. **Preparation for Doctoral Work**: The skills and methodologies learned during thesis work\u2014such as literature reviews, methodology design, and academic writing\u2014are directly applicable to PhD research.\n\nHowever, if you feel more inclined towards practical applications or industry work, the non-thesis option can still provide a strong foundation for a PhD, especially if you engage in research projects or internships.\n\nUltimately, consider your career goals, interests, and the type of experience you want to gain. It may also be helpful to discuss your plans with faculty or current PhD students for additional insights.",
+        "answer_length": 1375,
+        "model_info": "GPT-4o Mini (openai)"
+      },
+      "claude-sonnet-4-20250514": {
+        "success": true,
+        "latency_ms": 7373.536109924316,
+        "input_tokens": 67,
+        "output_tokens": 311,
+        "total_tokens": 378,
+        "cost": 0.004866,
+        "answer": "Choosing between the thesis and non-thesis track in the NYIT Computer Science M.S. program depends on your academic goals and preferences. Here are some considerations to help you decide, especially if you plan to pursue a PhD later:\n\n1. **Thesis Track**:\n   - **Research Experience**: The thesis track involves conducting original research, which can provide valuable experience and skills relevant to PhD studies.\n   - **Advisement**: You will work closely with a faculty advisor, which can lead to strong mentorship and networking opportunities.\n   - **Publication Potential**: Completing a thesis may yield opportunities to publish your research, which is beneficial when applying for PhD programs.\n   - **Depth of Knowledge**: A thesis allows you to deeply explore a specific topic, showcasing your ability to engage in rigorous academic work.\n\n2. **Non-Thesis Track**:\n   - **Coursework Focus**: This track is more oriented towards coursework and may be suitable if you prefer a broader knowledge base rather than specializing.\n   - **Professional Preparation**: If you aim for industry roles immediately after your master's, this option may better suit your goals.\n   - **Flexibility**: The non-thesis track might offer more flexibility in terms of electives and practical experience through projects.\n\n**Recommendation**: If your primary goal is to pursue a PhD, the thesis track is generally recommended. It provides essential research experience and can significantly strengthen your application for doctoral programs. However, consider your interests, strengths, and career plans before making a decision.",
+        "answer_length": 1616,
+        "model_info": "Claude Sonnet 4 (anthropic)"
+      },
+      "llama-3.3-70b-versatile": {
+        "success": true,
+        "latency_ms": 6234.671592712402,
+        "input_tokens": 67,
+        "output_tokens": 229,
+        "total_tokens": 296,
+        "cost": 0.00022044,
+        "answer": "If you are considering pursuing a PhD after completing your M.S. in Computer Science at NYIT, opting for the thesis track is generally advisable. Here\u2019s why:\n\n1. **Research Experience**: The thesis track involves conducting original research, which can help you develop critical skills and knowledge that are essential for doctoral studies.\n\n2. **Strong Relationships**: Working closely with a faculty advisor on your thesis can lead to stronger professional relationships. This can provide you with valuable mentorship and potentially strong letters of recommendation for your PhD applications.\n\n3. **Preparation for PhD Coursework**: The thesis process typically involves advanced coursework and independent study that can prepare you for the rigors of PhD-level work.\n\n4. **Demonstrated Commitment**: Completing a thesis demonstrates your ability to engage deeply with a subject, which is a key component of a PhD program.\n\nHowever, if you feel more inclined towards practical applications and industry work rather than academia, the non-thesis track may be more suitable. Ultimately, consider your career goals, interests in research, and the specific requirements of the PhD programs you may apply to in the future.",
+        "answer_length": 1220,
+        "model_info": "Groq Llama 3.3 (groq)"
+      }
+    }
+  },
+  {
+    "query": "I failed a required course. What are my options and how will this affect my graduation timeline?",
+    "query_id": 3,
+    "timestamp": "2025-12-25T03:34:36.645912",
+    "models": {
+      "gpt-4o-mini": {
+        "success": true,
+        "latency_ms": 10816.11156463623,
+        "input_tokens": 66,
+        "output_tokens": 332,
+        "total_tokens": 398,
+        "cost": 0.0002091,
+        "answer": "If you have failed a required course in the Computer Science M.S. program at NYIT, here are your options and the potential impact on your graduation timeline:\n\n1. **Retake the Course**: You can retake the course in a subsequent semester. Both the original and the retaken course grades will appear on your transcript, but only the higher grade will count towards your GPA. \n\n2. **Academic Advising**: It is advisable to meet with your academic advisor to discuss your situation. They can help you plan your course load and suggest strategies to improve your performance in future courses.\n\n3. **Impact on Graduation Timeline**:\n   - **Course Load**: Retaking a course may extend your graduation timeline, especially if it is a prerequisite for other courses. Plan your schedule carefully.\n   - **Credit Hours**: Ensure that you still meet the total credit hour requirement for graduation, which is typically 30 credits for the M.S. program. \n\n4. **Financial Considerations**: Consider any financial implications of retaking the course, including tuition costs and financial aid eligibility.\n\n5. **Academic Policies**: Familiarize yourself with the academic policies regarding course retakes, as they may vary, and ensure you are aware of any specific deadlines for registration and grading options (like pass/fail).\n\n6. **Support Resources**: Take advantage of academic resources such as tutoring, study groups, and workshops to enhance your understanding of the material.\n\nIn summary, while failing a required course can affect your graduation timeline, you have options to retake the course and improve your academic standing. Be proactive in seeking support and planning your coursework.",
+        "answer_length": 1690,
+        "model_info": "GPT-4o Mini (openai)"
+      },
+      "claude-sonnet-4-20250514": {
+        "success": true,
+        "latency_ms": 7701.472997665405,
+        "input_tokens": 66,
+        "output_tokens": 318,
+        "total_tokens": 384,
+        "cost": 0.004968,
+        "answer": "If you have failed a required course in the Computer Science M.S. program at NYIT, here are your options and considerations regarding your graduation timeline:\n\n1. **Retake the Course**: You will need to retake the failed course in order to meet the program requirements. Make sure to check when the course is offered next (e.g., semester or summer session) to plan accordingly.\n\n2. **Impact on GPA**: Retaking the course can provide an opportunity to improve your GPA. However, both the original and the retaken course grades may factor into your GPA, depending on NYIT\u2019s grade replacement policy. Check with the registrar for specifics on how this may affect your academic standing.\n\n3. **Advising Services**: Schedule a meeting with your academic advisor to discuss your situation. They can help you create a plan for retaking the course and advise on any academic support services available to help you succeed.\n\n4. **Graduation Timeline**: The failure could potentially delay your graduation, especially if the course is a prerequisite for other courses. Review your degree audit to understand how it affects your course sequencing and overall timeline.\n\n5. **Academic Policies**: Familiarize yourself with NYIT's academic policies regarding course failures, retakes, and any implications for financial aid or student status.\n\n6. **Support Resources**: Utilize tutoring services or study groups to improve your understanding of the material before retaking the course. \n\nMake sure to act promptly, as there may be deadlines for retaking courses or for any academic appeals if you wish to contest the grade.",
+        "answer_length": 1611,
+        "model_info": "Claude Sonnet 4 (anthropic)"
+      },
+      "llama-3.3-70b-versatile": {
+        "success": true,
+        "latency_ms": 8315.389156341553,
+        "input_tokens": 66,
+        "output_tokens": 356,
+        "total_tokens": 422,
+        "cost": 0.00032018000000000004,
+        "answer": "If you have failed a required course in the Computer Science M.S. program at NYIT, here are your options and the potential impact on your graduation timeline:\n\n### Options:\n1. **Retake the Course**: You will need to retake the failed course. This is often the most straightforward option, allowing you to improve your grade. Check with your academic advisor or the course syllabus for details on when the course is offered again.\n\n2. **Course Substitution**: In some cases, you may be able to substitute the failed course with an equivalent course, provided it meets the program requirements. You will need approval from your advisor and possibly the department chair.\n\n3. **Academic Support**: Utilize academic resources such as tutoring, study groups, or office hours with faculty to help improve your understanding of the material when you retake the course.\n\n### Impact on Graduation Timeline:\n- **Extended Timeline**: Since the course is a requirement for your degree, failing it may delay your graduation. The extent of the delay depends on when you can retake the course and when it is offered next.\n- **Credit Load**: Ensure that retaking the course fits into your overall credit load for the semester. You may need to adjust your schedule accordingly.\n- **Academic Standing**: A failed course may affect your GPA and academic standing, which could influence your eligibility for financial aid or scholarships.\n\n### Next Steps:\n- **Consult Your Advisor**: Schedule a meeting with your academic advisor to discuss your specific situation, plan your next steps, and ensure you remain on track for graduation.\n- **Check Policies**: Review NYIT\u2019s academic policies regarding course retakes and grading to understand how it may affect your GPA.\n\nTaking proactive steps will help you navigate this situation effectively.",
+        "answer_length": 1822,
+        "model_info": "Groq Llama 3.3 (groq)"
+      }
+    }
+  },
+  {
+    "query": "Compare the benefits of taking summer courses versus regular semester for finishing my degree faster",
+    "query_id": 4,
+    "timestamp": "2025-12-25T03:35:06.485579",
+    "models": {
+      "gpt-4o-mini": {
+        "success": true,
+        "latency_ms": 9486.752033233643,
+        "input_tokens": 62,
+        "output_tokens": 406,
+        "total_tokens": 468,
+        "cost": 0.00025289999999999997,
+        "answer": "Taking summer courses can offer several benefits compared to regular semester courses, especially for students looking to finish their degree faster in the NYIT Computer Science M.S. program. Here are some key advantages:\n\n1. **Accelerated Progression**: Summer courses are often shorter in duration (typically 6-8 weeks), allowing you to complete a course in a fraction of the time compared to a regular semester (15-16 weeks). This can help you earn credits more quickly.\n\n2. **Focused Learning**: With fewer courses being offered and smaller class sizes, summer classes can provide a more focused learning environment, allowing for more personalized attention from instructors.\n\n3. **Reduced Competition for Resources**: During the summer, there may be less competition for resources such as lab space, faculty office hours, and library access, which can enhance your learning experience.\n\n4. **Flexible Schedule**: Summer sessions may offer more flexible scheduling options, enabling you to take courses at times that fit better with your personal commitments or work schedules.\n\n5. **Opportunity for Intensive Study**: If you are particularly interested in a topic, summer courses can allow for more intensive study, as you can immerse yourself fully in a subject without the distraction of a full course load.\n\n6. **Potential for Financial Aid**: Some students may find that taking summer courses allows them to maintain full-time status for financial aid considerations, which can help with funding their education.\n\nHowever, consider the following potential challenges of summer courses:\n\n- **Pace**: The accelerated nature of summer courses can be intense and may require a higher level of commitment and time management.\n- **Limited Course Offerings**: Not all courses may be available in the summer, so it\u2019s important to check the course schedule in advance.\n\nIn summary, taking summer courses can be an effective strategy for completing your degree faster, provided you are prepared for the accelerated pace and can find the courses you need. Always consult with your academic advisor to ensure that summer courses align with your degree plan and goals.",
+        "answer_length": 2165,
+        "model_info": "GPT-4o Mini (openai)"
+      },
+      "claude-sonnet-4-20250514": {
+        "success": true,
+        "latency_ms": 8854.950428009033,
+        "input_tokens": 62,
+        "output_tokens": 447,
+        "total_tokens": 509,
+        "cost": 0.006891,
+        "answer": "Taking summer courses can be a strategic way to finish your degree faster in NYIT's Computer Science M.S. program. Here are some benefits and considerations:\n\n### Benefits of Summer Courses:\n\n1. **Accelerated Pace**: Summer courses are typically shorter, allowing you to complete courses in a condensed timeframe. This can help you accumulate credits more quickly.\n\n2. **Focused Learning**: With fewer courses to juggle, you may find it easier to focus on the material, potentially leading to better comprehension and grades.\n\n3. **Flexible Scheduling**: Summer schedules may offer different timing options, which can provide flexibility for working students or those with other commitments.\n\n4. **Reduced Competition for Resources**: Smaller class sizes in summer sessions may offer more opportunities for interaction with professors and access to resources.\n\n5. **Opportunity to Catch Up**: If you fell behind during the regular semesters, summer courses can help you get back on track without extending your overall time in the program.\n\n6. **Exploring New Topics**: Summer courses might offer unique electives that aren\u2019t available during the regular academic year, allowing you to explore areas of interest.\n\n### Considerations:\n\n1. **Intensive Workload**: The accelerated pace may be challenging, requiring significant time and effort in a shorter period. Ensure you can commit to the workload.\n\n2. **Limited Course Offerings**: Not all courses may be available during the summer, which could limit your options for fulfilling specific requirements.\n\n3. **Financial Considerations**: Evaluate the cost of summer courses, as they may differ from regular semester tuition. Financial aid options may also vary.\n\n4. **Scheduling Conflicts**: If you have commitments such as a job or internship, ensure that the summer course schedule aligns with your availability.\n\n5. **Potential Burnout**: Taking courses year-round without breaks can lead to fatigue, so consider your mental and physical well-being.\n\n### Conclusion:\n\nSummer courses can be a valuable way to expedite your degree progress in the Computer Science M.S. program at NYIT, but it\u2019s important to weigh the benefits against your personal circumstances and academic goals. Plan strategically and consult with an academic advisor if you have questions about specific course availability or degree requirements.",
+        "answer_length": 2372,
+        "model_info": "Claude Sonnet 4 (anthropic)"
+      },
+      "llama-3.3-70b-versatile": {
+        "success": true,
+        "latency_ms": 9055.546522140503,
+        "input_tokens": 62,
+        "output_tokens": 401,
+        "total_tokens": 463,
+        "cost": 0.00035337,
+        "answer": "Taking summer courses can offer several benefits compared to regular semester courses for finishing your degree faster, especially in NYIT's Computer Science M.S. program:\n\n### Benefits of Summer Courses:\n\n1. **Accelerated Learning**: Summer courses are typically shorter in duration, allowing you to cover material more quickly. This can help you complete required courses in a condensed time frame.\n\n2. **Focused Environment**: With fewer distractions and a lighter course load, summer sessions often provide a more focused learning environment, which can enhance your understanding of the material.\n\n3. **Increased Flexibility**: Summer courses may offer different formats, including online options, which can allow you to manage your schedule more effectively while taking intensive courses.\n\n4. **Opportunity for Prerequisites**: If you need to complete prerequisite courses before advancing to higher-level courses, summer sessions can help you get those out of the way, allowing you to progress more quickly.\n\n5. **Less Competition for Resources**: During summer sessions, class sizes may be smaller, which can provide more opportunities for interaction with professors and access to resources.\n\n6. **Enhanced Retention**: If you\u2019re taking courses in quick succession, you may find that the material is more easily retained, as you are continuously engaging with the subject matter.\n\n### Considerations:\n\n- **Course Availability**: Not all courses may be offered during the summer. Check the schedule to ensure that required courses are available.\n\n- **Workload Intensity**: The accelerated pace can be intense. Be prepared for a heavier workload in a shorter timeframe.\n\n- **Financial Aid**: Ensure that summer courses are covered by your financial aid package, as this can vary based on your status.\n\n### Conclusion:\n\nIf you're looking to finish your Computer Science M.S. degree faster, summer courses can be a viable option, provided that you carefully plan your course load and ensure that the necessary classes are available. Balancing the intensity of summer courses with your personal and professional commitments is crucial for success.",
+        "answer_length": 2152,
+        "model_info": "Groq Llama 3.3 (groq)"
+      }
+    }
+  },
+  {
+    "query": "I want to switch my concentration. What's the process and how will it impact my graduation date?",
+    "query_id": 5,
+    "timestamp": "2025-12-25T03:35:36.889898",
+    "models": {
+      "gpt-4o-mini": {
+        "success": true,
+        "latency_ms": 7300.542593002319,
+        "input_tokens": 66,
+        "output_tokens": 252,
+        "total_tokens": 318,
+        "cost": 0.00016109999999999999,
+        "answer": "To switch your concentration within the Computer Science M.S. program at NYIT, you should follow these steps:\n\n1. **Consult with Your Academic Advisor**: Schedule a meeting with your academic advisor to discuss your reasons for changing concentrations, and to understand the implications of the switch.\n\n2. **Complete the Change of Concentration Form**: Obtain and fill out the Change of Concentration form from the Office of the Registrar or the department's administrative office.\n\n3. **Submit the Form**: Submit the completed form to the appropriate office (usually the Office of the Registrar) for approval.\n\n4. **Review Your Academic Plan**: After your concentration change is approved, review your academic plan with your advisor to ensure that you understand the new requirements for your chosen concentration.\n\n**Impact on Graduation Date**:\n- **Course Availability**: Depending on the courses required for your new concentration and their availability, this may extend your graduation date.\n- **Prerequisites**: If you need to take additional prerequisite courses, this could also delay your graduation.\n- **Advising**: Your advisor can help you create a plan to minimize any delay.\n\nIt's essential to make this change as early as possible in your program to better understand how it will affect your timeline.",
+        "answer_length": 1319,
+        "model_info": "GPT-4o Mini (openai)"
+      },
+      "claude-sonnet-4-20250514": {
+        "success": true,
+        "latency_ms": 13435.622453689575,
+        "input_tokens": 66,
+        "output_tokens": 322,
+        "total_tokens": 388,
+        "cost": 0.005028,
+        "answer": "To switch your concentration within the Computer Science M.S. program at NYIT, follow these steps:\n\n1. **Consult Your Academic Advisor**: Schedule a meeting with your academic advisor to discuss your desire to change concentrations. They can provide guidance on how the switch may affect your academic plan and graduation timeline.\n\n2. **Submit a Change of Concentration Form**: Complete and submit the appropriate form for changing your concentration. This form can typically be found on the NYIT website or obtained from the registrar's office.\n\n3. **Review Course Requirements**: Each concentration has specific course requirements. Review the curriculum for your new concentration to understand which courses you will need to take and if any previously completed courses can be applied.\n\n4. **Plan Your Schedule**: Work with your advisor to create an updated academic plan that includes the courses required for your new concentration. This plan will help you determine if additional semesters are necessary to meet the new requirements.\n\n5. **Impact on Graduation Date**: Changing your concentration may impact your graduation date, depending on how many credits you have already completed and the courses required for the new concentration. If the new concentration has a different set of core requirements or elective options, it may take additional time to fulfill those.\n\n6. **Monitor Your Progress**: After the switch is approved, keep track of your academic progress and stay in regular contact with your advisor to ensure you are on track to meet your new graduation timeline.\n\nIt\u2019s essential to act promptly if you wish to change concentrations, as certain courses may only be offered in specific semesters, which could further affect your graduation date.",
+        "answer_length": 1769,
+        "model_info": "Claude Sonnet 4 (anthropic)"
+      },
+      "llama-3.3-70b-versatile": {
+        "success": true,
+        "latency_ms": 8317.992448806763,
+        "input_tokens": 66,
+        "output_tokens": 310,
+        "total_tokens": 376,
+        "cost": 0.00028384000000000005,
+        "answer": "To switch your concentration within the Computer Science M.S. program at NYIT, you should follow these steps:\n\n1. **Consult Your Academic Advisor**: Schedule a meeting with your academic advisor to discuss your desire to change concentrations. They can provide guidance on the implications of the switch and help you understand the requirements for the new concentration.\n\n2. **Complete the Concentration Change Form**: You will need to fill out a concentration change form, which is typically available through the registrar or the department office. Ensure that you provide all required information and obtain necessary signatures.\n\n3. **Submit the Form**: Once completed, submit the form to the registrar's office or the designated department office as instructed.\n\n4. **Review New Requirements**: After your change is approved, familiarize yourself with the new concentration's specific course requirements, as they may differ from your previous concentration.\n\n**Impact on Graduation Date**:\n- **Course Availability**: Depending on when you switch, some courses required for your new concentration may only be offered in specific semesters, which could potentially delay your graduation date.\n- **Prerequisites**: Ensure you meet any prerequisites for the new concentration courses. If you need to take additional courses, this could also extend your time to graduation.\n- **Advising**: Your advisor will help you create a revised academic plan that outlines how to meet your new concentration requirements in a timely manner.\n\nIn summary, switching concentrations involves a formal process and may impact your graduation timeline, so it's crucial to communicate closely with your advisor throughout this process.",
+        "answer_length": 1718,
+        "model_info": "Groq Llama 3.3 (groq)"
+      }
+    }
+  }
+]

@@ -12,8 +12,9 @@ from pathlib import Path
 # Configuration
 BACKEND_DIR = Path(__file__).resolve().parents[1]  
 RESULTS_DIR = BACKEND_DIR / "benchmark_tests" / "results"
-CHARTS_DIR = Path(__file__).resolve().parent / "charts_multi_enhanced"
+CHARTS_DIR = Path(__file__).resolve().parent / "charts"
 CHARTS_DIR.mkdir(exist_ok=True)
+
 # Style
 plt.style.use('seaborn-v0_8-darkgrid')
 COLORS = ['#2ecc71', '#3498db', '#e74c3c', '#f39c12', '#9b59b6']

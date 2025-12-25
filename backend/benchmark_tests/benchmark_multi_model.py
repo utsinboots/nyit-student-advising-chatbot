@@ -11,8 +11,10 @@ from pathlib import Path
 
 # Configuration
 API_URL = "http://localhost:8000"
-RESULTS_DIR = Path("results")
-RESULTS_DIR.mkdir(exist_ok=True)
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+RESULTS_DIR = SCRIPT_DIR / "results"
+RESULTS_DIR.mkdir(parents=True, exist_ok=True)
 
 MODELS_TO_TEST = [
     {
