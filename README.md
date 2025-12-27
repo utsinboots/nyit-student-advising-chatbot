@@ -168,10 +168,6 @@ curl -X POST http://localhost:8000/chat \
   -d '{"query": "What are the graduation requirements?"}'
 ```
 
-### Indexes
-
-Have fresh indexes\rag_index before starting, simple rag_index folder, faiss.index auto creates after server starts
-
 ### Run Interactive Chatbot
 
 ```bash
