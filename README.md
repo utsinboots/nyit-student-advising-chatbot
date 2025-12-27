@@ -1,6 +1,6 @@
 # NYIT AI Academic Advisor Chatbot
 
-To Design, Develop and Benchmark an Efficient Hybrid AI Acadmic Advisor Chatbot: Analyzing AI Agent Models, Large Language Models, and Network Configurations.
+An intelligent hybrid chatbot system combining rule-based routing, RAG (Retrieval-Augmented Generation), and multi-model LLM integration for academic advising. Features comprehensive benchmarking across GPT-4o-mini, Claude Sonnet 4, and Groq Llama 3.3 with 60% cost optimization.
 
 ## Demo
 
@@ -10,9 +10,9 @@ To Design, Develop and Benchmark an Efficient Hybrid AI Acadmic Advisor Chatbot:
 
 This project implements a hybrid AI acadeimc advising chatbot that intelligently routes queries through three specialized modules:
 
-- **Rule-based routing** for quick FAQ responses
-- **RAG (Retrieval-Augmented Generation)** for context-aware answers
-- **Multi-model LLM routing** for complex reasoning
+- **Rule-based routing** Instant responses for 62 common FAQ patterns with near-zero latency
+- **RAG (Retrieval-Augmented Generation)** Context-aware answers using FAISS vector search across 49-document corpus
+- **Multi-model LLM routing** Complex reasoning with dynamic model selection (GPT-4o-mini, Claude Sonnet 4, Groq Llama 3.3)
 
 ## AI Academic Advising Chatbot Model
 
@@ -20,19 +20,21 @@ This project implements a hybrid AI acadeimc advising chatbot that intelligently
 
 ## Key Features
 
-- **Intelligent Routing:** Automatically selects optimal response method
-- **Multi-Model Comparison:** Benchmarks 3 leading LLM providers
-- **Cost Optimization:** Routes simple queries to rule-based or RAG modules
-- **RAG Integration:** Context-aware responses using vector similarity
-- **Production Deployment:** Local or Cloud-based on AWS EC2
+- **Intelligent Routing:** Automatically selects optimal response method based on query complexity
+- **Multi-Model Comparison:** Systematic benchmarking of 3 LLM models with multiple performance and quality metrics
+- **Cost Optimization:** Achieves 60% cost reduction through hybrid architecture vs single-model approach
+- **RAG Integration:** Semantic search using FAISS vector database with cosine similarity
+- **Production Deployment:** Local setup and cloud-based on AWS EC2 with automated benchmarking
 
 ## Tech Stack
 
 - **Backend:** Python 3.12, FastAPI
 - **LLM APIs:** OpenAI (GPT-4o-mini), Anthropic (Claude Sonnet 4), Groq (Llama 3.3)
-- **Vector DB:** FAISS
+- **Vector DB:** FAISS (Facebook AI Similarity Search)
 - **Embeddings:** OpenAI text-embedding-3-small
-- **Cloud Deployment:** AWS EC2 t3.micro (Ubuntu 24.04)
+- **Data Processing:** scikit-learn, NumPy, pandas
+- **Cloud Deployment:** AWS EC2 t3.micro (Ubuntu 24.04 LTS)
+- **Visualization:** Matplotlib (20+ analytical charts)
 
 ## Benchmark Results
 
@@ -46,12 +48,25 @@ This project implements a hybrid AI acadeimc advising chatbot that intelligently
 
 ### Key Findings
 
-- **Groq is 5x faster** than GPT-4o-mini
-- **GPT-4o-mini offers best value** for general queries
-- **Claude provides highest quality** for complex reasoning
-- **Hybrid routing saves 60% on costs** vs LLM only approach
+**Model Performance:**
 
-## Project Structure
+- **Groq Llama 3.3:** 5x faster latency (~1500ms vs ~8000ms) with 500 tokens/sec throughput - ideal for speed-critical queries
+- **GPT-4o-mini:** Best cost-performance ratio at $0.0002/query with 80% completeness - optimal for general queries
+- **Claude Sonnet 4:** Highest quality scores (90% completeness) with superior reasoning capabilities at $0.0049/query
+
+**System Optimization:**
+
+- **Achieved 60% cost reduction** compared to single-model (Claude-only) approach through intelligent hybrid routing
+- Rule-based tier handles ~40% of queries (simple FAQs) with near-zero latency and cost
+- RAG tier handles ~35% of queries (policy questions) using FAISS vector search with 49-document corpus
+- LLM tier handles ~25% of queries (complex reasoning) with dynamic model selection
+
+**Evaluation Metrics:**
+
+- Benchmarked multiple performance and quality metrics including latency, cost efficiency, throughput, completeness, readability, and specificity
+- Generated 20+ analytical visualization charts for comprehensive performance analysis
+- Test dataset: curated queries across varying complexity levels
+- Systematic evaluation comparing local vs cloud deployment performance
 
 ## Project Structure
 
@@ -105,13 +120,18 @@ nyit_student_advising/
 ### Installation
 
 ```bash
-# Copy project folder or Clone repository
+# Clone repository
 git clone https://github.com/utsinboots/nyit-student-advising-chatbot
-cd nyit-ai-chatbot/backend
+cd nyit-student-advising-chatbot/backend
 
 # Create virtual environment
 python -m venv venv
+
+# Activate virtual environment
+# On Windows:
 venv\Scripts\activate
+# On Mac/Linux:
+source venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
@@ -152,53 +172,96 @@ curl -X POST http://localhost:8000/chat \
 
 Have fresh indexes\rag_index before starting, simple rag_index folder, faiss.index auto creates after server starts
 
-### Run Client
+### Run Interactive Chatbot
 
+```bash
 python run_chatbot.py
+```
 
 ## Running Benchmarks
 
 ### Multi-Model Comparison
 
 ```bash
-cd backend\benchmark_test\
+cd backend/benchmark_tests/
+
+# Run basic benchmark
 python benchmark.py
+
+#Run multi-model benchmark
+python benchmark_multi_model.py
+
+# Run enhanced multi-model benchmark
 python benchmark_multi_enhanced.py
+
+# Generate visualization charts
+cd ../generate_charts/
+python generate_charts.py
+python generate_multi_model_charts.py
 python generate_multi_enhanced_charts.py
 ```
 
-Results saved to `backed/benchmark_tests/results/` and charts to `/backed/generate_charts/..`
+Results saved to:
+
+- `backend/benchmark_tests/results/` (JSON data)
+- `backend/generate_charts/charts_*/` (PNG visualizations)
 
 ## Cloud Deployment
 
 ### AWS EC2 Deployment
 
-See [docs/AWS_EC2_DEPLOYMENT](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html#ec2-launch-instance) for detailed deployment guide.
+**Instance Configuration:**
 
-- AWS EC2 t3.micro instance (AWS free tier)
-- OS: Ubuntu 24.04 LTS, 2 vCPUs, 1GB RAM
-- Generate AWS EC2 private key and add it in the root directory ~/your_key_name.pem
-- Copy/edit all essential files in proper paths after installing the OS on AWS
+- Instance Type: t3.micro (AWS Free Tier eligible)
+- OS: Ubuntu 24.04 LTS
+- Resources: 2 vCPUs, 1GB RAM
+- Storage: 8GB (expandable as needed)
+
+**Deployment Steps:**
 
 ```bash
-# AWS EC2
-git clone https://github.com/utsinboots/nyit-student-advising-chatbot
+# 1. Launch EC2 instance and generate key pair
+# Download your-key-name.pem
 
-# Connect to AWS EC2 after running the EC2 instance
-ssh -i ~/nyit_student_advising/nyit-student-advising-key.pem ubuntu@_public_IPv4_address_
-cd ~/nyit-student-advising-chatbot/backend
+# 2. Connect to EC2 instance
+ssh -i ~/path/to/your-key-name.pem ubuntu@your-ec2-public-ip
+
+# 3. Clone repository
+git clone https://github.com/utsinboots/nyit-student-advising-chatbot
+cd nyit-student-advising-chatbot/backend
+
+# 4. Set up environment
+python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-# Configure .env
-python run.py
+
+# 5. Configure environment variables
+nano .env
+# Add your API keys
+
+# 6. Run server
+python run_server.py
 ```
+
+**Access your deployed chatbot at:** `http://your-ec2-public-ip:8000`
+
+For detailed AWS deployment guide, see [AWS EC2 Documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html)
 
 ## Academic Context
 
-**Institution:** New York Institute of Technology (NYIT)  
-**Program:** M.S. in Computer Science  
+**Institution:** New York Institute of Technology  
+**Program:** M.S. Computer Science  
 **Course:** CSCI 870 Project I
 **Semester:** Fall 2025
+
+## Future Enhancements
+
+- Expand academic advising knowledge base
+- Implement user feedback for continuous improvement
+- Incorporate feedback from faculty members and advisors
+- Add support for additional LLM models
+- Add CI/CD pipeline with GitHub Actions
+- Containerize with Docker for easier deployment
 
 ## Author
 
@@ -209,15 +272,18 @@ December 2025
 
 ## References
 
-- Lanham, M. (2024). AI Agents in Action. Manning Publications.
-- Liang, P., et al. (2022). Holistic evaluation of language models. arXiv:2211.09110.
-- D. Park, G. -t. An, C. Kamyod and C. G. Kim, "A Study on Performance Improvement of Prompt Engineering for Generative AI with a Large Language Model," in Journal of Web Engineering, doi: 10.13052/jwe1540-9589.2285.
-- K. Mikael, C. Öz, T. A. Rashid and G. S. Nariman, "A Hybrid Chatbot Model for Enhancing Administrative Support in Education: Comparative Analysis, Integration, and Optimization".
-- M. Rahman, M. Abedin, M. Z. Abir, F. I. Ansari, A. Reza, F. Y. Sadeque and N. Farhan, “Transforming Mentorship: An AI Powered Chatbot Approach to University Guidance,” arXiv:2511.04172v1.
-- C. W. Okonkwo and A. Ade-Ibijola, “Chatbots applications in education: A systematic review,” _Computers and Education: Artificial Intelligence_, doi:10.1016/j.caeai.2021.100033.
-- Á. A. Martínez-Gárate, J. A. Aguilar-Calderón, C. Tripp-Barba and A. Zaldívar-Colado, "Model-Driven Approaches for Conversational Agents Development: A Systematic Mapping Study," doi: 10.1109/ACCESS.2023.3293849.
-- Q. Lu, L. Zhu, X. Xu, Z. Xing and J. Whittle, "Toward Responsible AI in the Era of Generative AI: A Reference Architecture for Designing Foundation Model-Based Systems," doi: 10.1109/MS.2024.3406333.
-- D. Park, G. -t. An, C. Kamyod and C. G. Kim, "A Study on Performance Improvement of Prompt Engineering for Generative AI with a Large Language Model," doi: 10.13052/jwe1540-9589.2285.
-- S. Wu and M. Luo, "Selection and Resource Allocation Strategies for Chatbot Technologies in Higher Education: An Optimization Model Approach," doi: 10.1109/ACCESS.2025.3530413.
+1. Lanham, M. (2024). _AI Agents in Action_. Manning Publications.
+2. Liang, P., et al. (2022). "Holistic evaluation of language models." _arXiv:2211.09110_.
+3. Park, D., An, G., Kamyod, C., & Kim, C. G. (2024). "A Study on Performance Improvement of Prompt Engineering for Generative AI with a Large Language Model." _Journal of Web Engineering_, doi: 10.13052/jwe1540-9589.2285.
+4. Mikael, K., Öz, C., Rashid, T. A., & Nariman, G. S. (2024). "A Hybrid Chatbot Model for Enhancing Administrative Support in Education: Comparative Analysis, Integration, and Optimization."
+5. Rahman, M., Abedin, M., Abir, M. Z., Ansari, F. I., Reza, A., Sadeque, F. Y., & Farhan, N. (2025). "Transforming Mentorship: An AI Powered Chatbot Approach to University Guidance." _arXiv:2511.04172v1_.
+6. Okonkwo, C. W., & Ade-Ibijola, A. (2021). "Chatbots applications in education: A systematic review." _Computers and Education: Artificial Intelligence_, doi:10.1016/j.caeai.2021.100033.
+7. Martínez-Gárate, Á. A., Aguilar-Calderón, J. A., Tripp-Barba, C., & Zaldívar-Colado, A. (2023). "Model-Driven Approaches for Conversational Agents Development: A Systematic Mapping Study." doi: 10.1109/ACCESS.2023.3293849.
+8. Lu, Q., Zhu, L., Xu, X., Xing, Z., & Whittle, J. (2024). "Toward Responsible AI in the Era of Generative AI: A Reference Architecture for Designing Foundation Model-Based Systems." doi: 10.1109/MS.2024.3406333.
+9. Wu, S., & Luo, M. (2025). "Selection and Resource Allocation Strategies for Chatbot Technologies in Higher Education: An Optimization Model Approach." doi: 10.1109/ACCESS.2025.3530413.
+
+## License
+
+This project is for academic purposes as part of NYIT M.S. Computer Science program.
 
 ---
